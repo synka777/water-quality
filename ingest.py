@@ -11,7 +11,7 @@ PARAMS = {
     "page": 1
 }
 
-OUTPUT_FILE = "./data/water_quality_2026.jsonl"
+OUTPUT_FILE = "./data/water_quality_2026.json"
 MAX_RETRIES = 3
 
 
