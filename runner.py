@@ -1,4 +1,4 @@
-from ingest import fetch_all_data
+from bronze import fetch_all_data
 from silver import run_silver
 from gold import run_gold
 
