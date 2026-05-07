@@ -1,6 +1,7 @@
 import requests
 import json
 from time import sleep
+import os
 
 BASE_URL = "https://hubeau.eaufrance.fr/api/v1/qualite_eau_potable/resultats_dis"
 
@@ -11,13 +12,19 @@ PARAMS = {
     "page": 1
 }
 
-OUTPUT_FILE = "./data/water_quality_2026.json"
+# Get the script's directory and construct the path relative to it
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_FILE = os.path.join(SCRIPT_DIR, "..", "data", "water_quality_2026.json")
 MAX_RETRIES = 3
 
 
 def fetch_all_data():
     page = 1
     total_fetched = 0
+
+    # Ensure the output directory exists
+    output_dir = os.path.dirname(OUTPUT_FILE)
+    os.makedirs(output_dir, exist_ok=True)
 
     with open(OUTPUT_FILE, "w") as f:
         while True:
