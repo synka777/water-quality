@@ -43,7 +43,6 @@ try:
 
     
     # Configuration Great Expectations avec Pandas DataFrame
-    
 
     print("Configuration Great Expectations...")
 
