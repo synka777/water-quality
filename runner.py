@@ -1,6 +1,6 @@
-from bronze import fetch_all_data
-from silver import run_silver
-from gold import run_gold
+from scripts.bronze import fetch_all_data
+from scripts.silver import run_silver
+from scripts.gold import run_gold
 
 def run_pipeline():
     fetch_all_data()

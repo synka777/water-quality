@@ -1,6 +1,6 @@
-# ============================================================================
+
 # QUALITY CHECKS Databricks Free
-# ============================================================================
+
 from pyspark.sql import SparkSession
 import great_expectations as gx
 import pandas as pd
@@ -8,11 +8,9 @@ import os
 import tempfile
 import shutil
 
-# ----------------------------------------------------------------------------
 # 1. Vérification de la couche Silver
-# ----------------------------------------------------------------------------
 
-base_path = "./data/"
+base_path = "../data/"
 silver_path = f"{base_path}silver/water_quality_clean"
 
 print(f"Vérification du dossier Silver : {silver_path}")
@@ -24,9 +22,7 @@ if not os.path.exists(silver_path):
         f"Chemin attendu : {silver_path}\n"
     )
 
-# ----------------------------------------------------------------------------
 # 2. Création d'un contexte temporaire Great Expectations
-# ----------------------------------------------------------------------------
 
 print("Initialisation du contexte Great Expectations...")
 
@@ -48,9 +44,9 @@ try:
 
     print(f"{len(df_pandas)} lignes chargées pour validation.")
 
-    # ========================================================================
+    
     # Configuration Great Expectations avec Pandas DataFrame
-    # ========================================================================
+    
 
     print("Configuration Great Expectations...")
 
