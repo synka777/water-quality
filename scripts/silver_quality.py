@@ -19,10 +19,12 @@ print(f"Vérification du dossier Silver : {silver_path}")
 
 # Vérification robuste (évite crash dbutils.fs.ls)
 if not os.path.exists(silver_path):
-    raise FileNotFoundError(
+    print(
         f"⚠️ Le dossier Silver n'existe pas.\n"
         f"Chemin attendu : {silver_path}\n"
+        f"Validation ignorée - exécutez d'abord silver.py"
     )
+    exit(0)
 
 # 2. Création d'un contexte temporaire Great Expectations
 

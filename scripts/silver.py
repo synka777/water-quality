@@ -155,7 +155,7 @@ df_final.select(
 # Ecriture dans un répertoire local
 # Création du répertoire de sortie s'il n'existe pas
 import os
-os.makedirs("..data/silver", exist_ok=True)
+os.makedirs("../data/silver", exist_ok=True)
 
 output_path = "../data/silver/water_quality_clean"
 df_final.write.mode("overwrite").parquet(output_path)
