@@ -31,6 +31,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run Gold Quality Checks
+      - name: Run Bronze layer
         run: |
           python ./scripts/bronze.py
