@@ -1,11 +1,19 @@
-from scripts.bronze import fetch_all_data
-from scripts.silver import run_silver
-from scripts.gold import run_gold
+import subprocess
 
-def run_pipeline():
-    fetch_all_data()
-    run_silver()
-    run_gold()
+scripts = [
+    "bronze.py",
+    "silver.py",
+    "silver_quality.py",
+    "gold.py",
+    "gold_quality.py"
+]
 
-if __name__ == "__main__":
-    run_pipeline()
+for script in scripts:
+    print(f"\nRunning {script}...\n")
+
+    result = subprocess.run(
+        ["python", script],
+        check=True
+    )
+
+print("\nPipeline completed.")

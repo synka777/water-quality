@@ -1,0 +1,36 @@
+name: Water Quality Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  pipeline:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Gold Quality Checks
+        run: |
+          python ./scripts/bronze.py

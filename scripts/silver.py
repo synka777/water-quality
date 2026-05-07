@@ -1,8 +1,11 @@
+from pathlib import Path
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import FloatType, StringType, DateType
 
-bronze_path = "../data/water_quality_2026.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+INPUT_FILE = BASE_DIR / "data" / "water_quality_2026.json"
+bronze_path = str(INPUT_FILE)
 spark = SparkSession.builder.appName("RawJSON").getOrCreate()
 df_raw = spark.read.json(bronze_path) # Détection automatique de l'encodage et du schéma
 print("✅ Données brutes chargées depuis JSON")

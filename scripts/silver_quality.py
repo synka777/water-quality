@@ -2,6 +2,7 @@
 # QUALITY CHECKS Databricks Free
 
 from pyspark.sql import SparkSession
+from pathlib import Path
 import great_expectations as gx
 import pandas as pd
 import os
@@ -10,8 +11,9 @@ import shutil
 
 # 1. Vérification de la couche Silver
 
-base_path = "../data/"
-silver_path = f"{base_path}silver/water_quality_clean"
+BASE_DIR = Path(__file__).resolve().parent.parent
+silver_path = BASE_DIR / "data" / "silver" / "water_quality_clean"
+silver_path = str(silver_path)
 
 print(f"Vérification du dossier Silver : {silver_path}")
 

@@ -1,6 +1,7 @@
 
 # GOLD QUALITY CHECKS
 
+from pathlib import Path
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 import os
@@ -11,7 +12,9 @@ spark = SparkSession.builder \
     .appName("GoldQualityChecks") \
     .getOrCreate()
 
-base_path = "./data/gold/"
+BASE_DIR = Path(__file__).resolve().parent.parent
+base_path = str(BASE_DIR / "data" / "gold")
+
 
 # Helper
 

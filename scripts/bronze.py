@@ -1,6 +1,8 @@
 import requests
 import json
 from time import sleep
+from pathlib import Path
+
 
 BASE_URL = "https://hubeau.eaufrance.fr/api/v1/qualite_eau_potable/resultats_dis"
 
@@ -10,8 +12,9 @@ PARAMS = {
     "size": 10000,  # safe value
     "page": 1
 }
-
-OUTPUT_FILE = "./data/water_quality_2026.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+OUTPUT_FILE = BASE_DIR / "data" / "water_quality_2026.json"
+OUTPUT_FILE = str(OUTPUT_FILE)
 MAX_RETRIES = 3
 
 
