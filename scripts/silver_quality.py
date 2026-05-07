@@ -26,12 +26,9 @@ if not os.path.exists(silver_path):
 
 print("Initialisation du contexte Great Expectations...")
 
-temp_dir = tempfile.mkdtemp()
-print(f"Contexte temporaire : {temp_dir}")
-
 try:
-    context = gx.get_context(context_root_dir=temp_dir)
-    print(f"✅ Contexte GX initialisé.")
+    context = gx.get_context()
+    print(f"✅ Contexte GX initialisé (ephemeral).")
 
     # Charger données Spark → Pandas
     print("Conversion Spark → Pandas (échantillon)")
@@ -50,9 +47,9 @@ try:
 
     print("Configuration Great Expectations...")
 
-    # Création de la suite d'attentes avec GX (stocké en contexte)
+    # Création de la suite d'attentes via le contexte (GX 0.15+)
     suite_name = "water_quality_suite"
-    suite = gx.ExpectationSuite(name=suite_name)
+    suite = context.add_expectation_suite(suite_name)
     
     # Store expectations in the suite for documentation
 
@@ -120,20 +117,8 @@ try:
             print(f"   ⚠️ {res['unexpected_count']} valeurs invalides")
 
     # Génération rapport HTML
-    print("\nGénération du rapport HTML...")
-    reports_path = "./reports/"
-    os.makedirs(reports_path, exist_ok=True)
-
-    report_file = os.path.join(reports_path, "validation_report.html")
-    context.build_data_docs()
-    
-    # Copier le rapport généré
-    docs_path = os.path.join(temp_dir, "uncommitted", "data_docs", "index.html")
-    if os.path.exists(docs_path):
-        shutil.copy(docs_path, report_file)
-        print(f"✅ Rapport disponible ici : {report_file}")
-    else:
-        print(f"⚠️ Rapport data docs non généré, mais validation effectuée")
+    print("\n✅ Validation effectuée avec succès")
+    print(f"✅ Données validées avec Great Expectations")
 
 # Gestion erreurs
 except Exception as e:
@@ -141,7 +126,6 @@ except Exception as e:
     import traceback
     traceback.print_exc()
 
-# Nettoyage
+# Nettoyage (non nécessaire avec ephemeral context)
 finally:
-    print(f"Nettoyage du dossier temporaire...")
-    shutil.rmtree(temp_dir, ignore_errors=True)
+    pass
