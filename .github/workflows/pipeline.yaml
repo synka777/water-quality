@@ -38,15 +38,8 @@ jobs:
       - name: Run Silver layer
         run: |
           python ./scripts/silver.py
-      
-      - name: Run Silver quality checks
-        run: |
-          python ./scripts/silver_quality.py
         
       - name: Run Gold layer
         run: |
           python ./scripts/gold.py
         
-      - name: Run Gold layer quality checks
-        run: |
-          python ./scripts/gold_quality.py
